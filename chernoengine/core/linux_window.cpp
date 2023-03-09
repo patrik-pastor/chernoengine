@@ -6,6 +6,8 @@
 
 #include <chernoengine/core/linux_window.hpp>
 #include <chernoengine/events/application_event.hpp>
+#include <chernoengine/events/key_event.hpp>
+#include <chernoengine/events/mouse_event.hpp>
 
 namespace chernoengine {
 
@@ -23,6 +25,9 @@ LinuxWindow::LinuxWindow(const WindowProps &props) {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwInit();
+        glfwSetErrorCallback([](int error, const char *description){
+            std::cerr << "GLFW Error: code(" << error << "): " << description << '\n';
+        });
     }
 
     std::cout << "glfwCreateWindow\n";
@@ -47,9 +52,58 @@ LinuxWindow::LinuxWindow(const WindowProps &props) {
         data.event_callback(event);
     });
 
-    glfwSetWindowCloseCallback(window_, [](GLFWwindow *window){
-        WindowData data = *(WindowData *) glfwGetWindowUserPointer(window);
+    glfwSetWindowCloseCallback(window_, [](GLFWwindow *window) {
+        WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
         WindowCloseEvent event;
+        data.event_callback(event);
+    });
+
+    glfwSetKeyCallback(window_, [](GLFWwindow *window, int key, int scancode, int action, int mods) {
+        WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
+        switch (action) {
+            case GLFW_PRESS: {
+                KeyPressedEvent event(key, false);
+                data.event_callback(event);
+                break;
+            }
+            case GLFW_RELEASE: {
+                KeyReleasedEvent event(key);
+                data.event_callback(event);
+                break;
+            }
+            case GLFW_REPEAT: {
+                KeyPressedEvent event(key, true);
+                data.event_callback(event);
+                break;
+            }
+        }
+    });
+
+    glfwSetMouseButtonCallback(window_, [](GLFWwindow *window, int button, int action, int mods) {
+        WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
+        switch (action) {
+            case GLFW_PRESS: {
+                MouseButtonPressedEvent event(button);
+                data.event_callback(event);
+                break;
+            }
+            case GLFW_RELEASE: {
+                MouseButtonReleasedEvent event(button);
+                data.event_callback(event);
+                break;
+            }
+        }
+    });
+
+    glfwSetScrollCallback(window_, [](GLFWwindow *window, double xoffset, double yoffset) {
+        WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
+        MouseScrolledEvent event(xoffset, yoffset);
+        data.event_callback(event);
+    });
+
+    glfwSetCursorPosCallback(window_, [](GLFWwindow *window, double xpos, double ypos) {
+        WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
+        MouseMovedEvent event(xpos, ypos);
         data.event_callback(event);
     });
 }

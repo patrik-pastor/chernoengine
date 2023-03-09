@@ -26,12 +26,23 @@ void Application::OnEvent(Event &e) {
     std::cout << e.ToString() << std::endl;
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+
+    for (auto it = layer_stack_.end(); it != layer_stack_.begin();) {
+        (*--it)->OnEvent(e);
+        if (e.handled_) {
+            break;
+        }
+    }
 }
 
 void Application::Run() {
     while (IsRunning()) {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        for (Layer *layer: layer_stack_)
+            layer->OnUpdate();
+
         window_->OnUpdate();
     }
 }
@@ -47,6 +58,14 @@ void Application::SetRunning(bool running) {
 bool Application::OnWindowClose(WindowCloseEvent &e) {
     SetRunning(false);
     return true;
+}
+
+void Application::PushLayer(Layer *layer) {
+    layer_stack_.PushLayer(layer);
+}
+
+void Application::PushOverlay(Layer *layer) {
+    layer_stack_.PushOverlay(layer);
 }
 
 } // chernoengine

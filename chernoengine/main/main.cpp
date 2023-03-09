@@ -1,5 +1,9 @@
 #include <iostream>
 
+#include <chernoengine/core/application.hpp>
+
 int main() {
-std::cout << "hello world" << std::endl;
+    chernoengine::Application app;
+    app.PushLayer(new chernoengine::ExampleLayer());
+    app.Run();
 }

@@ -11,6 +11,7 @@
 
 #include <chernoengine/events/event.hpp>
 #include <chernoengine/events/application_event.hpp>
+#include <chernoengine/core/layer_stack.hpp>
 
 namespace chernoengine {
 
@@ -27,11 +28,15 @@ public:
 
     void SetRunning(bool running);
 
+    void PushLayer(Layer *layer);
+    void PushOverlay(Layer *layer);
+
 private:
     bool OnWindowClose(WindowCloseEvent& e);
 
     Window *window_;
     bool running_;
+    LayerStack layer_stack_;
 };
 
 } // chernoengine
