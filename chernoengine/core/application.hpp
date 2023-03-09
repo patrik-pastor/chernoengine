@@ -10,18 +10,28 @@
 #include <memory>
 
 #include <chernoengine/events/event.hpp>
+#include <chernoengine/events/application_event.hpp>
 
 namespace chernoengine {
 
 class Application {
 public:
     Application();
-    void OnEvent(const Event& e);
+    virtual ~Application() = default;
+
+    void OnEvent(Event &e);
+
     void Run();
 
+    bool IsRunning() const;
+
+    void SetRunning(bool running);
+
 private:
-    std::unique_ptr<Window> window;
-    bool is_running;
+    bool OnWindowClose(WindowCloseEvent& e);
+
+    Window *window_;
+    bool running_;
 };
 
 } // chernoengine

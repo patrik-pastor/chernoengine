@@ -24,15 +24,15 @@ struct WindowProps {
 
 class Window {
 public:
-    using EventCallbackFn = std::function<void(Event&)>;
+    using EventCallbackFn = std::function<void(Event &)>;
 
     virtual ~Window() = default;
 
     virtual void OnUpdate() = 0;
 
-    virtual int getWidth() const = 0;
+    virtual int GetWidth() const = 0;
 
-    virtual int getHeight() const = 0;
+    virtual int GetHeight() const = 0;
 
     virtual void SetEventCallback(const EventCallbackFn callback) = 0;
     //TODO: rest

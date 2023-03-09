@@ -5,53 +5,74 @@
 #include <iostream>
 
 #include <chernoengine/core/linux_window.hpp>
+#include <chernoengine/events/application_event.hpp>
 
 namespace chernoengine {
 
 static int glfw_window_count = 0;
 
 LinuxWindow::LinuxWindow(const WindowProps &props) {
-    data.title = props.title;
-    data.width = props.width;
-    data.height = props.height;
+    std::cout << "Creating window_ " << props.title << "(" << props.width << ", " << props.height << ")\n";
+    data_.title = props.title;
+    data_.width = props.width;
+    data_.height = props.height;
 
     if (glfw_window_count == 0) {
+        std::cout << "glfwInit\n";
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwInit();
-        // TODO rest
     }
 
-    window = glfwCreateWindow(props.width, props.height, props.title.c_str(), nullptr, nullptr);
-    if(window == nullptr) {
-        std::cerr << "failed to create GLFW window\n";
+    std::cout << "glfwCreateWindow\n";
+    window_ = glfwCreateWindow(props.width, props.height, props.title.c_str(), nullptr, nullptr);
+    glfw_window_count++;
+    if (window_ == nullptr) {
+        std::cerr << "failed to create GLFW window_\n";
     }
 
     // TODO: do it the right way (cherno using scopes, not pointers)
-    context = dynamic_cast<OpenglContext *>(GraphicsContext::Create(window));
-    context->Init();
+    context_ = dynamic_cast<OpenglContext *>(GraphicsContext::Create(window_));
+    context_->Init();
+
+    glfwSetWindowUserPointer(window_, &data_);
+
+    glfwSetWindowSizeCallback(window_, [](GLFWwindow *window, int width, int height) {
+        WindowData data = *(WindowData *) glfwGetWindowUserPointer(window);
+        data.width = width;
+        data.height = height;
+
+        WindowResizeEvent event(width, height);
+        data.event_callback(event);
+    });
+
+    glfwSetWindowCloseCallback(window_, [](GLFWwindow *window){
+        WindowData data = *(WindowData *) glfwGetWindowUserPointer(window);
+        WindowCloseEvent event;
+        data.event_callback(event);
+    });
 }
 
 void LinuxWindow::OnUpdate() {
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(window_);
     glfwPollEvents();
 }
 
-int LinuxWindow::getWidth() const {
-    return data.width;
+int LinuxWindow::GetWidth() const {
+    return data_.width;
 }
 
-int LinuxWindow::getHeight() const {
-    return data.height;
+int LinuxWindow::GetHeight() const {
+    return data_.height;
 }
 
-GLFWwindow *LinuxWindow::getWindow() const {
-    return window;
+GLFWwindow *LinuxWindow::GetWindow() const {
+    return window_;
 }
 
 void LinuxWindow::SetEventCallback(const Window::EventCallbackFn callback) {
-    data.event_callback = callback;
+    data_.event_callback = callback;
 }
 
 } // chernoengine

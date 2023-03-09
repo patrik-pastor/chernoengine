@@ -17,30 +17,30 @@ namespace chernoengine {
 
 class LinuxWindow : public Window{
 public:
-    explicit LinuxWindow(const WindowProps& props = {});
+    explicit LinuxWindow(const WindowProps& window = {});
 
     ~LinuxWindow() override = default;
 
     void OnUpdate() override;
 
-    int getWidth() const override;
+    int GetWidth() const override;
 
-    int getHeight() const override;
+    int GetHeight() const override;
 
     void SetEventCallback(const EventCallbackFn callback) override;
 
     //TODO: remove this
-    GLFWwindow *getWindow() const;
+    GLFWwindow *GetWindow() const;
 
 private:
-    GLFWwindow *window;
-    OpenglContext *context;
+    GLFWwindow *window_;
+    OpenglContext *context_;
     struct WindowData {
         std::string title;
         int width;
         int height;
         EventCallbackFn event_callback;
-    } data;
+    } data_;
 };
 
 } // chernoengine

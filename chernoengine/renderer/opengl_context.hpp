@@ -19,7 +19,7 @@ public:
     void Init() override;
 
 private:
-    GLFWwindow *window;
+    GLFWwindow *window_;
 };
 
 } // chernoengine

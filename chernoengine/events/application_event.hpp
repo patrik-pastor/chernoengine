@@ -15,10 +15,19 @@ public:
 
     std::string ToString() const override;
 
+    EVENT_CLASS_TYPE(WindowResize);
+
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 
 private:
-    int width, height;
+    int width_, height_;
+};
+
+class WindowCloseEvent : public Event {
+public:
+    EVENT_CLASS_TYPE(WindowClose);
+
+    EVENT_CLASS_CATEGORY(EventCategoryApplication);
 };
 
 } // chernoengine

@@ -11,14 +11,11 @@
 
 namespace chernoengine {
 
-OpenglContext::OpenglContext(GLFWwindow *window) : window(window) {
+OpenglContext::OpenglContext(GLFWwindow *window) : window_(window) {
 }
 
 void OpenglContext::Init() {
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, [](GLFWwindow *_, int width, int height) {
-        glViewport(0, 0, width, height);
-    });
+    glfwMakeContextCurrent(window_);
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         std::cerr << "failed to initialize GLAD";
     }

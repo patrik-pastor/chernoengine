@@ -8,11 +8,11 @@
 
 namespace chernoengine {
 
-WindowResizeEvent::WindowResizeEvent(int width, int height) : width(width), height(height) {}
+WindowResizeEvent::WindowResizeEvent(int width, int height) : width_(width), height_(height) {}
 
 std::string WindowResizeEvent::ToString() const {
     std::stringstream ss;
-    ss << "WindowResizeEvent: " << width << ", " << height;
+    ss << "WindowResizeEvent: " << width_ << ", " << height_;
     return ss.str();
 }
 
