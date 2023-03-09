@@ -14,4 +14,5 @@ include_directories(.)
 include_directories(${THIRD_PARTY_DIRECTORY})
 
 add_subdirectory(chernoengine/main)
-add_subdirectory(chernoengine/logging)
+add_subdirectory(chernoengine/events)
+add_subdirectory(chernoengine/core)
