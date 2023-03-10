@@ -17,7 +17,13 @@
 
 namespace chernoengine {
 
+Application *Application::application_instance_ = nullptr;
+
 Application::Application() {
+    if(application_instance_ != nullptr){
+        std::cerr << "Application already exists!\n";
+    }
+    application_instance_ = this;
     window_ = new LinuxWindow;
     window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
 }
@@ -62,10 +68,20 @@ bool Application::OnWindowClose(WindowCloseEvent &e) {
 
 void Application::PushLayer(Layer *layer) {
     layer_stack_.PushLayer(layer);
+    layer->OnAttach();
 }
 
 void Application::PushOverlay(Layer *layer) {
     layer_stack_.PushOverlay(layer);
+    layer->OnAttach();
+}
+
+Application& Application::GetApplicationInstance() {
+    return *application_instance_;
+}
+
+Window &Application::GetWindow() const {
+    return *window_;
 }
 
 } // chernoengine

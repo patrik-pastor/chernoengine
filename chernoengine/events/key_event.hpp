@@ -44,6 +44,15 @@ public:
     EVENT_CLASS_TYPE(KeyReleased);
 };
 
+class KeyTypedEvent : public KeyEvent {
+public:
+    explicit KeyTypedEvent(int key_code);
+
+    std::string ToString() const override;
+
+    EVENT_CLASS_TYPE(KeyTyped)
+};
+
 } // chernoengine
 
 #endif //CHERNOENGINE_KEY_EVENT_HPP

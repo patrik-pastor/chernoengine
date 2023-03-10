@@ -17,23 +17,16 @@ public:
 
     virtual ~Layer() = default;
 
-    virtual void OnUpdate() {}
+    virtual void OnAttach() = 0;
 
-    virtual void OnEvent(Event &event) {}
+    virtual void OnUpdate() = 0;
+
+    virtual void OnEvent(Event &event) = 0;
 
     //TODO: rest of "On*" callbacks
 
 private:
     std::string name_;
-};
-
-class ExampleLayer : public Layer {
-public:
-    ExampleLayer();
-
-    void OnUpdate() override;
-
-    void OnEvent(Event &event) override;
 };
 
 } // chernoengine

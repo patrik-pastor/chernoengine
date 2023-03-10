@@ -35,4 +35,13 @@ std::string KeyReleasedEvent::ToString() const {
     ss << "KeyReleasedEvent: " << key_code_ << '\n';
     return ss.str();
 }
+
+KeyTypedEvent::KeyTypedEvent(int key_code) : KeyEvent(key_code) {}
+
+std::string KeyTypedEvent::ToString() const {
+    std::stringstream ss;
+    ss << "KeyTypedEvent: " << key_code_ << '\n';
+    return ss.str();
+}
+
 } // chernoengine

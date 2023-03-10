@@ -18,8 +18,8 @@ struct WindowProps {
     int height;
 
     WindowProps(const std::string &title = "Cherno Engine",
-                int width = 800,
-                int height = 600);
+                int width = 1280,
+                int height = 1020);
 };
 
 class Window {

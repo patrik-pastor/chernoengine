@@ -10,14 +10,4 @@ namespace chernoengine {
 
 Layer::Layer(const std::string &name) : name_(name) {}
 
-ExampleLayer::ExampleLayer() : Layer("Example") {}
-
-void ExampleLayer::OnUpdate() {
-    std::cout << "ExampleLayer::Update\n";
-}
-
-void ExampleLayer::OnEvent(Event &event) {
-    std::cout << event.ToString() << std::endl;
-}
-
 } // chernoengine

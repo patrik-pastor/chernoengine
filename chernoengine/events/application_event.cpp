@@ -16,4 +16,12 @@ std::string WindowResizeEvent::ToString() const {
     return ss.str();
 }
 
+int WindowResizeEvent::GetWidth() const {
+    return width_;
+}
+
+int WindowResizeEvent::GetHeight() const {
+    return height_;
+}
+
 } // chernoengine

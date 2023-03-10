@@ -13,6 +13,10 @@ class WindowResizeEvent : public Event {
 public:
     WindowResizeEvent(int width, int height);
 
+    int GetWidth() const;
+
+    int GetHeight() const;
+
     std::string ToString() const override;
 
     EVENT_CLASS_TYPE(WindowResize);

@@ -18,7 +18,6 @@ namespace chernoengine {
 class Application {
 public:
     Application();
-    virtual ~Application() = default;
 
     void OnEvent(Event &e);
 
@@ -29,10 +28,17 @@ public:
     void SetRunning(bool running);
 
     void PushLayer(Layer *layer);
+
     void PushOverlay(Layer *layer);
 
+    static Application& GetApplicationInstance();
+
+    Window &GetWindow() const;
+
 private:
-    bool OnWindowClose(WindowCloseEvent& e);
+    static Application *application_instance_;
+
+    bool OnWindowClose(WindowCloseEvent &e);
 
     Window *window_;
     bool running_;
