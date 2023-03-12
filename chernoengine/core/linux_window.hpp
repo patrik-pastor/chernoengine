@@ -27,10 +27,9 @@ public:
 
     int GetHeight() const override;
 
-    void SetEventCallback(const EventCallbackFn callback) override;
+    void *GetNativeWindow() const override;
 
-    //TODO: remove this
-    GLFWwindow *GetWindow() const;
+    void SetEventCallback(const EventCallbackFn callback) override;
 
 private:
     GLFWwindow *window_;

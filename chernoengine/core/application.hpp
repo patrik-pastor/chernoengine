@@ -9,6 +9,9 @@
 
 #include <memory>
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 #include <chernoengine/events/event.hpp>
 #include <chernoengine/events/application_event.hpp>
 #include <chernoengine/core/layer_stack.hpp>

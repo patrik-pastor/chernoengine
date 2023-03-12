@@ -127,12 +127,12 @@ int LinuxWindow::GetHeight() const {
     return data_.height;
 }
 
-GLFWwindow *LinuxWindow::GetWindow() const {
-    return window_;
-}
-
 void LinuxWindow::SetEventCallback(const Window::EventCallbackFn callback) {
     data_.event_callback = callback;
+}
+
+void *LinuxWindow::GetNativeWindow() const {
+    return window_;
 }
 
 } // chernoengine

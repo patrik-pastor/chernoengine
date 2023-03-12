@@ -12,6 +12,7 @@
 #include <GLFW/glfw3.h>
 
 #include <chernoengine/core/linux_window.hpp>
+#include <chernoengine/core/input.hpp>
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
@@ -49,6 +50,9 @@ void Application::Run() {
         for (Layer *layer: layer_stack_)
             layer->OnUpdate();
 
+//        glm::vec2 pos = Input::GetMousePosition();
+//        std::cout << pos.x << ", " << pos.y << '\n';
+
         window_->OnUpdate();
     }
 }
@@ -83,5 +87,6 @@ Application& Application::GetApplicationInstance() {
 Window &Application::GetWindow() const {
     return *window_;
 }
+
 
 } // chernoengine

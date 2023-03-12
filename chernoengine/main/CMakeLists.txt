@@ -27,6 +27,8 @@ add_executable(main
         ../core/layer.cpp
         ../core/layer_stack.cpp
 
+        ../core/input.cpp
+
         ../core/application.cpp
         main.cpp)
 target_link_libraries(main glfw)
