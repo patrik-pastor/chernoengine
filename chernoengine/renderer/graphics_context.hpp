@@ -9,11 +9,13 @@ namespace chernoengine {
 
 class GraphicsContext {
 public:
+    static GraphicsContext *Create(void *window);
+
     virtual ~GraphicsContext() = default;
 
     virtual void Init() = 0;
 
-    static GraphicsContext *Create(void *window);
+    virtual void SwapBuffers() = 0;
 };
 
 } // chernoengine

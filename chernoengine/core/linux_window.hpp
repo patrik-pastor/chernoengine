@@ -33,7 +33,7 @@ public:
 
 private:
     GLFWwindow *window_;
-    OpenglContext *context_;
+    GraphicsContext *context_;
     struct WindowData {
         std::string title;
         int width;

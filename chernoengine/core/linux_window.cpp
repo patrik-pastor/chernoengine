@@ -34,8 +34,7 @@ LinuxWindow::LinuxWindow(const WindowProps &props) {
         std::cerr << "failed to create GLFW window_\n";
     }
 
-    // TODO: do it the right way (cherno using scopes, not pointers)
-    context_ = dynamic_cast<OpenglContext *>(GraphicsContext::Create(window_));
+    context_ = GraphicsContext::Create(window_);
     context_->Init();
 
     glfwSetWindowUserPointer(window_, &data_);
@@ -112,7 +111,7 @@ LinuxWindow::LinuxWindow(const WindowProps &props) {
 }
 
 void LinuxWindow::OnUpdate() {
-    glfwSwapBuffers(window_);
+    context_->SwapBuffers();
     glfwPollEvents();
 }
 

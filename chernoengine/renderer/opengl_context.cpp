@@ -25,4 +25,8 @@ void OpenglContext::Init() {
               "\nVersion: " << glGetString(GL_VERSION) << std::endl;
 }
 
+void OpenglContext::SwapBuffers() {
+    glfwSwapBuffers(window_);
+}
+
 } // chernoengine

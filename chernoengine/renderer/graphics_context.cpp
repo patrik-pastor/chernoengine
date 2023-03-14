@@ -12,7 +12,6 @@
 namespace chernoengine {
 
 GraphicsContext *GraphicsContext::Create(void *window) {
-    //TODO: do it the right way
     return new OpenglContext(static_cast<GLFWwindow*>(window));
 }
 
