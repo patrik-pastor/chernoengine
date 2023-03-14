@@ -25,9 +25,6 @@ LinuxWindow::LinuxWindow(const WindowProps &props) {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwInit();
-        glfwSetErrorCallback([](int error, const char *description){
-            std::cerr << "GLFW Error: code(" << error << "): " << description << '\n';
-        });
     }
 
     std::cout << "glfwCreateWindow\n";

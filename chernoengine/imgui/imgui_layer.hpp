@@ -18,28 +18,13 @@ public:
 
     void OnAttach() override;
 
-    void OnUpdate() override;
+    void OnDetach() override;
 
-    void OnEvent(Event &event) override;
+    void Begin() const;
 
-private:
-    bool OnWindowResizeEvent(WindowResizeEvent &e);
+    void End() const;
 
-    bool OnMouseButtonPressedEvent(MouseButtonPressedEvent &e);
-
-    bool OnMouseButtonReleaseEvent(MouseButtonReleasedEvent &e);
-
-    bool OnMouseScrolledEvent(MouseScrolledEvent &e);
-
-    bool OnMouseMovedEvent(MouseMovedEvent &e);
-
-    bool OnKeyPressedEvent(KeyPressedEvent &e);
-
-    bool OnKeyReleasedEvent(KeyReleasedEvent &e);
-
-    bool OnKeyTypedEvent(KeyTypedEvent& e);
-
-    float time_ = 0.0f;
+    void OnImguiRender() override;
 };
 
 } // chernoengine

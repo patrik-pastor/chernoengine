@@ -17,16 +17,23 @@ public:
 
     virtual ~Layer() = default;
 
-    virtual void OnAttach() = 0;
+    virtual void OnAttach() {}
 
-    virtual void OnUpdate() = 0;
+    virtual void OnDetach() {}
 
-    virtual void OnEvent(Event &event) = 0;
+    virtual void OnUpdate() {}
 
-    //TODO: rest of "On*" callbacks
+    virtual void OnImguiRender() {}
+
+    virtual void OnEvent(Event &event) {}
 
 private:
     std::string name_;
+};
+
+class ExampleLayer : public Layer {
+public:
+    void OnImguiRender() override;
 };
 
 } // chernoengine

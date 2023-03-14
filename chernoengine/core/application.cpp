@@ -25,8 +25,12 @@ Application::Application() {
         std::cerr << "Application already exists!\n";
     }
     application_instance_ = this;
+
     window_ = new LinuxWindow;
     window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
+
+    imgui_layer_ = new ImguiLayer;
+    PushOverlay(imgui_layer_);
 }
 
 void Application::OnEvent(Event &e) {
@@ -50,8 +54,10 @@ void Application::Run() {
         for (Layer *layer: layer_stack_)
             layer->OnUpdate();
 
-//        glm::vec2 pos = Input::GetMousePosition();
-//        std::cout << pos.x << ", " << pos.y << '\n';
+        imgui_layer_->Begin();
+        for (Layer *layer: layer_stack_)
+            layer->OnImguiRender();
+        imgui_layer_->End();
 
         window_->OnUpdate();
     }

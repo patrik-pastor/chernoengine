@@ -15,6 +15,7 @@
 #include <chernoengine/events/event.hpp>
 #include <chernoengine/events/application_event.hpp>
 #include <chernoengine/core/layer_stack.hpp>
+#include <chernoengine/imgui/imgui_layer.hpp>
 
 namespace chernoengine {
 
@@ -46,6 +47,7 @@ private:
     Window *window_;
     bool running_;
     LayerStack layer_stack_;
+    ImguiLayer *imgui_layer_;
 };
 
 } // chernoengine
