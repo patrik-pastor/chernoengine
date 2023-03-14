@@ -11,8 +11,12 @@ add_executable(main
         ${THIRD_PARTY_DIRECTORY}/imgui/backends/imgui_impl_glfw.cpp
         ${THIRD_PARTY_DIRECTORY}/imgui/backends/imgui_impl_opengl3.cpp
 
-        ../renderer/graphics_context.cpp
-        ../renderer/opengl_context.cpp
+        ../core/window.cpp
+        ../core/linux_window.cpp
+        ../core/layer.cpp
+        ../core/layer_stack.cpp
+        ../core/input.cpp
+        ../core/application.cpp
 
         ../events/event.cpp
         ../events/application_event.cpp
@@ -21,14 +25,13 @@ add_executable(main
 
         ../imgui/imgui_layer.cpp
 
-        ../core/window.cpp
-        ../core/linux_window.cpp
+        ../renderer/graphics_context.cpp
+        ../renderer/opengl_context.cpp
+        ../renderer/renderer_api.cpp
+        ../renderer/renderer.cpp
+        ../renderer/buffer.cpp
 
-        ../core/layer.cpp
-        ../core/layer_stack.cpp
+        ../opengl/opengl_buffer.cpp
 
-        ../core/input.cpp
-
-        ../core/application.cpp
         main.cpp)
 target_link_libraries(main glfw)

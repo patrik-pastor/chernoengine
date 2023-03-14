@@ -4,15 +4,12 @@
 
 #include <chernoengine/core/application.hpp>
 
-#include <memory>
 #include <functional>
 #include <iostream>
 
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 #include <chernoengine/core/linux_window.hpp>
-#include <chernoengine/core/input.hpp>
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
@@ -21,7 +18,7 @@ namespace chernoengine {
 Application *Application::application_instance_ = nullptr;
 
 Application::Application() {
-    if(application_instance_ != nullptr){
+    if (application_instance_ != nullptr) {
         std::cerr << "Application already exists!\n";
     }
     application_instance_ = this;
@@ -59,6 +56,7 @@ void Application::Run() {
             layer->OnImguiRender();
         imgui_layer_->End();
 
+
         window_->OnUpdate();
     }
 }
@@ -86,7 +84,7 @@ void Application::PushOverlay(Layer *layer) {
     layer->OnAttach();
 }
 
-Application& Application::GetApplicationInstance() {
+Application &Application::GetApplicationInstance() {
     return *application_instance_;
 }
 
