@@ -21,8 +21,13 @@ public:
 
     void Unbind() const override;
 
+    void SetLayout(const BufferLayout &layout) override;
+
+    const BufferLayout &GetLayout() const override;
+
 private:
     uint32_t renderer_id_;
+    BufferLayout layout_;
 };
 
 class OpenglIndexBuffer : public IndexBuffer {
