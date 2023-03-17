@@ -10,6 +10,7 @@
 #include <glad/glad.h>
 
 #include <chernoengine/core/linux_window.hpp>
+#include <chernoengine/renderer/renderer.hpp>
 #include <chernoengine/renderer/renderer_command.hpp>
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -18,7 +19,7 @@ namespace chernoengine {
 
 Application *Application::application_instance_ = nullptr;
 
-Application::Application() {
+Application::Application() : camera_(-1.0f, 1.0f, -0.1f, 1.0f) {
     if (application_instance_ != nullptr) {
         std::cerr << "Application already exists!\n";
     }
@@ -31,7 +32,7 @@ Application::Application() {
     PushOverlay(imgui_layer_);
 }
 
-void Application::OnEvent(Event &e) {
+void Application::OnEvent(Event& e) {
     std::cout << e.ToString() << std::endl;
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
@@ -49,12 +50,12 @@ void Application::Run() {
         RendererCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         RendererCommand::Clear();
 
-        // RendererCommand::BeginScene()
+        Renderer::BeginScene(camera_);
 
         // shaders
-        // Renderer::Submit(vertexArray)
+//         Renderer::Submit(vertexArray)
 
-        // Renderer::EndScene()
+        Renderer::EndScene();
 
         for (Layer *layer: layer_stack_)
             layer->OnUpdate();
@@ -77,7 +78,7 @@ void Application::SetRunning(bool running) {
     running_ = running;
 }
 
-bool Application::OnWindowClose(WindowCloseEvent &e) {
+bool Application::OnWindowClose(WindowCloseEvent& e) {
     SetRunning(false);
     return true;
 }
@@ -92,11 +93,11 @@ void Application::PushOverlay(Layer *layer) {
     layer->OnAttach();
 }
 
-Application &Application::GetApplicationInstance() {
+Application& Application::GetApplicationInstance() {
     return *application_instance_;
 }
 
-Window &Application::GetWindow() const {
+Window& Application::GetWindow() const {
     return *window_;
 }
 

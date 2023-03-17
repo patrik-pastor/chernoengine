@@ -8,6 +8,8 @@
 
 namespace chernoengine {
 
+Renderer::SceneData *Renderer::scene_data_ = new SceneData;
+
 RendererApi::API Renderer::GetRendererApi() {
     return RendererApi::GetApi();
 }
@@ -15,6 +17,14 @@ RendererApi::API Renderer::GetRendererApi() {
 void Renderer::Submit(const std::shared_ptr<VertexArray> &vertex_array) {
     vertex_array->Bind();
     RendererCommand::DrawIndexed(vertex_array);
+}
+
+void Renderer::BeginScene(const OrthographicCamera& camera) {
+    scene_data_->view_projection_matrix = camera.GetViewProjectionMatrix();
+}
+
+void Renderer::EndScene() {
+
 }
 
 } // chernoengine

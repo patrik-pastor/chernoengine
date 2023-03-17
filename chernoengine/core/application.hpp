@@ -16,6 +16,7 @@
 #include <chernoengine/events/application_event.hpp>
 #include <chernoengine/core/layer_stack.hpp>
 #include <chernoengine/imgui/imgui_layer.hpp>
+#include <chernoengine/renderer/orthographic_camera.hpp>
 
 namespace chernoengine {
 
@@ -45,9 +46,10 @@ private:
     bool OnWindowClose(WindowCloseEvent &e);
 
     Window *window_;
-    bool running_;
+    bool running_ = true;
     LayerStack layer_stack_;
     ImguiLayer *imgui_layer_;
+    OrthographicCamera camera_;
 };
 
 } // chernoengine

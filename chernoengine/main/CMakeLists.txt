@@ -32,6 +32,7 @@ add_executable(main
         ../renderer/buffer.cpp
         ../renderer/vertex_array.cpp
         ../renderer/renderer_command.cpp
+        ../renderer/orthographic_camera.cpp
 
         ../opengl/opengl_buffer.cpp
         ../opengl/opengl_vertex_array.cpp
