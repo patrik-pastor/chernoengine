@@ -96,6 +96,35 @@ int ElementComponentCount(ShaderDataType type) {
     return -1;
 }
 
+GLenum ShaderDataTypeToOpenglBaseType(ShaderDataType type) {
+    switch (type) {
+        case ShaderDataType::Float:
+            return GL_FLOAT;
+        case ShaderDataType::Float2:
+            return GL_FLOAT;
+        case ShaderDataType::Float3:
+            return GL_FLOAT;
+        case ShaderDataType::Float4:
+            return GL_FLOAT;
+        case ShaderDataType::Mat3:
+            return GL_FLOAT;
+        case ShaderDataType::Mat4:
+            return GL_FLOAT;
+        case ShaderDataType::Int:
+            return GL_INT;
+        case ShaderDataType::Int2:
+            return GL_INT;
+        case ShaderDataType::Int3:
+            return GL_INT;
+        case ShaderDataType::Int4:
+            return GL_INT;
+        case ShaderDataType::Bool:
+            return GL_BOOL;
+    }
+    std::cerr << "Unknown ShaderDataType\n";
+    return -1;
+}
+
 BufferElement::BufferElement(ShaderDataType type, const std::string &name) :
         type(type),
         name(name),
@@ -121,5 +150,13 @@ BufferLayout::BufferLayout(const std::initializer_list<BufferElement> &elements)
 int BufferLayout::GetStride() const {
     return stride_;
 }
+
+std::vector<BufferElement>::iterator BufferLayout::begin() { return elements_.begin(); }
+
+std::vector<BufferElement>::iterator BufferLayout::end() { return elements_.end(); }
+
+std::vector<BufferElement>::const_iterator BufferLayout::begin() const { return elements_.begin(); }
+
+std::vector<BufferElement>::const_iterator BufferLayout::end() const { return elements_.end(); }
 
 } // chernoengine

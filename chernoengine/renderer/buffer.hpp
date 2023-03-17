@@ -9,15 +9,20 @@
 #include <vector>
 #include <initializer_list>
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 namespace chernoengine {
 
 enum class ShaderDataType {
     None = 0, Float, Float2, Float3, Float4, Mat3, Mat4, Int, Int2, Int3, Int4, Bool
 };
 
-static int ShaderDataTypeSize(ShaderDataType type);
+int ShaderDataTypeSize(ShaderDataType type);
 
-static int ElementComponentCount(ShaderDataType type);
+int ElementComponentCount(ShaderDataType type);
+
+GLenum ShaderDataTypeToOpenglBaseType(ShaderDataType type);
 
 struct BufferElement {
     BufferElement(ShaderDataType type, const std::string &name);
@@ -37,6 +42,14 @@ public:
     BufferLayout(const std::initializer_list<BufferElement> &elements);
 
     int GetStride() const;
+
+    std::vector<BufferElement>::iterator begin();
+
+    std::vector<BufferElement>::iterator end();
+
+    std::vector<BufferElement>::const_iterator begin() const;
+
+    std::vector<BufferElement>::const_iterator end() const;
 
 private:
     void CalculateOffsetAndStride();
