@@ -49,7 +49,6 @@ private:
     bool running_ = true;
     LayerStack layer_stack_;
     ImguiLayer *imgui_layer_;
-    OrthographicCamera camera_;
 };
 
 } // chernoengine

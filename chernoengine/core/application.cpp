@@ -9,17 +9,17 @@
 
 #include <glad/glad.h>
 
+#include <chernoengine/core/core.hpp>
 #include <chernoengine/core/linux_window.hpp>
 #include <chernoengine/renderer/renderer.hpp>
 #include <chernoengine/renderer/renderer_command.hpp>
 
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 namespace chernoengine {
 
 Application *Application::application_instance_ = nullptr;
 
-Application::Application() : camera_(-1.0f, 1.0f, -0.1f, 1.0f) {
+Application::Application(){
     if (application_instance_ != nullptr) {
         std::cerr << "Application already exists!\n";
     }
@@ -47,15 +47,15 @@ void Application::OnEvent(Event& e) {
 
 void Application::Run() {
     while (IsRunning()) {
-        RendererCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+        RendererCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
         RendererCommand::Clear();
 
-        Renderer::BeginScene(camera_);
+//        Renderer::BeginScene(camera_);
 
         // shaders
 //         Renderer::Submit(vertexArray)
 
-        Renderer::EndScene();
+//        Renderer::EndScene();
 
         for (Layer *layer: layer_stack_)
             layer->OnUpdate();
