@@ -12,7 +12,7 @@
 namespace chernoengine {
 
 VertexBuffer *VertexBuffer::Create(float *vertices, int size) {
-    switch (Renderer::GetRendererApi().GetApi()) {
+    switch (Renderer::GetRendererApi()) {
         case RendererApi::API::None:
             std::cerr << "RendererApi::None is currently not supported\n";
             return nullptr;
@@ -25,7 +25,7 @@ VertexBuffer *VertexBuffer::Create(float *vertices, int size) {
 }
 
 IndexBuffer *IndexBuffer::Create(int *indices, int count) {
-    switch (Renderer::GetRendererApi().GetApi()) {
+    switch (Renderer::GetRendererApi()) {
         case RendererApi::API::None:
             std::cerr << "RendererApi::None is currently not supported\n";
             return nullptr;

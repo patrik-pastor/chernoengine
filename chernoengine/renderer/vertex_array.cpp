@@ -12,7 +12,7 @@
 namespace chernoengine {
 
 std::shared_ptr<VertexArray> VertexArray::Create() {
-    switch (Renderer::GetRendererApi().GetApi()) {
+    switch (Renderer::GetRendererApi()) {
         case RendererApi::API::None:
             std::cerr << "RendererApi::None is currently not supported\n";
             return nullptr;

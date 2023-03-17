@@ -11,4 +11,5 @@ RendererApi::API RendererApi::api_ = RendererApi::API::Opengl;
 RendererApi::API RendererApi::GetApi() {
     return api_;
 }
+
 } // chernoengine

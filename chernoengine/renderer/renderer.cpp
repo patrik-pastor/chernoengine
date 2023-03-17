@@ -4,12 +4,17 @@
 
 #include <chernoengine/renderer/renderer.hpp>
 
+#include <chernoengine/renderer/renderer_command.hpp>
+
 namespace chernoengine {
 
-RendererApi Renderer::renderer_api_ = RendererApi();
+RendererApi::API Renderer::GetRendererApi() {
+    return RendererApi::GetApi();
+}
 
-const RendererApi &Renderer::GetRendererApi() {
-    return renderer_api_;
+void Renderer::Submit(const std::shared_ptr<VertexArray> &vertex_array) {
+    vertex_array->Bind();
+    RendererCommand::DrawIndexed(vertex_array);
 }
 
 } // chernoengine

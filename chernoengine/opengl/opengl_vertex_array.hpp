@@ -25,6 +25,10 @@ public:
 
     void SetIndexBuffer(const std::shared_ptr<IndexBuffer> &buffer) override;
 
+    const std::vector<std::shared_ptr<VertexBuffer>> &GetVertexBuffers() const override;
+
+    const std::shared_ptr<IndexBuffer> &GetIndexBuffer() const override;
+
 private:
     uint32_t renderer_id_;
     std::vector<std::shared_ptr<VertexBuffer>> vertex_buffers_;

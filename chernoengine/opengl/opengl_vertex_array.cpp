@@ -49,4 +49,12 @@ void OpenglVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer> &buffe
     index_buffer_ = buffer;
 }
 
+const std::vector<std::shared_ptr<VertexBuffer>> &OpenglVertexArray::GetVertexBuffers() const {
+    return vertex_buffers_;
+}
+
+const std::shared_ptr<IndexBuffer> &OpenglVertexArray::GetIndexBuffer() const {
+    return index_buffer_;
+}
+
 } // chernoengine

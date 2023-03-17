@@ -10,6 +10,7 @@
 #include <glad/glad.h>
 
 #include <chernoengine/core/linux_window.hpp>
+#include <chernoengine/renderer/renderer_command.hpp>
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
@@ -45,8 +46,15 @@ void Application::OnEvent(Event &e) {
 
 void Application::Run() {
     while (IsRunning()) {
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        RendererCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+        RendererCommand::Clear();
+
+        // RendererCommand::BeginScene()
+
+        // shaders
+        // Renderer::Submit(vertexArray)
+
+        // Renderer::EndScene()
 
         for (Layer *layer: layer_stack_)
             layer->OnUpdate();

@@ -11,10 +11,9 @@ namespace chernoengine {
 
 class Renderer {
 public:
-    static const RendererApi &GetRendererApi();
+    static RendererApi::API GetRendererApi();
 
-private:
-    static RendererApi renderer_api_;
+    static void Submit(const std::shared_ptr<VertexArray> &vertex_array);
 };
 
 } // chernoengine

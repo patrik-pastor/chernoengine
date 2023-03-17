@@ -31,9 +31,11 @@ add_executable(main
         ../renderer/renderer.cpp
         ../renderer/buffer.cpp
         ../renderer/vertex_array.cpp
+        ../renderer/renderer_command.cpp
 
         ../opengl/opengl_buffer.cpp
         ../opengl/opengl_vertex_array.cpp
+        ../opengl/opengl_renderer_api.cpp
 
         main.cpp)
 target_link_libraries(main glfw)
